@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -47,9 +50,47 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
+
+
 dependencies {
+
+    // Splash
+    implementation(libs.androidx.core.splashscreen)
+
+    // ViewModel
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Hilt-Dagger
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+    implementation (libs.kotlinx.coroutines.play.services)
+    implementation (libs.kotlinx.coroutines.core)
+
+    // ROOM
+    implementation (libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    // RETROFIT
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
+    // Import the Firebase BoM
+    implementation(platform(libs.firebase.bom))
+
+    // Firebase Authentication and Cloud Firestore
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+
+    // Material Icons
+    implementation ("androidx.compose.material:material-icons-extended:1.6.8")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -66,4 +107,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(kotlin("script-runtime"))
 }
